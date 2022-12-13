@@ -1,0 +1,2 @@
+[nodeX]
+ec2-34-226-211-183.compute-1.amazonaws.com

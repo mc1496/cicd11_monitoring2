@@ -1,0 +1,33 @@
+Phase-1: prometheus (only prometheus)
+1- max@m20:~/y/xCloudDevOps/cicd/cicd11_monitoring1$ ./deploy.sh xam-ec2-mon1 ec2-prometheus.yml ec2-prometheus.json
+
+2- copy XAM-EC2PublicDnsName-Prometheus Value to  inventory-ec2-prometheus.txt 
+
+3- max@m20:~/y/xCloudDevOps/cicd/cicd11_monitoring1$ ansible-playbook -i inventory-ec2-prometheus.txt ansible-ec2-prometheus.yml --private-key=xam-ec2-key-cicd.pem
+
+4- in browser check XAM-EC2PublicDnsName-Prometheus Value:9090
+
+5- go to status service directory
+
+6- max@m20:~/y/xCloudDevOps/cicd/cicd11_monitoring1$ ./delete.sh xam-ec2-mon1
+--------------------------------------------------------------------------------
+Phase-2: prometheus + node-exporter
+./deploy.sh xam-ec2-mon1 ec2-prometheus.yml ec2-prometheus.json
+ec2-107-20-37-92.compute-1.amazonaws.com to inventory-ec2-prometheus.txt
+
+./deploy.sh xam-ec2-nodex1 ec2-node-exporter.yml ec2-node-exporter.json
+ec2-34-226-211-183.compute-1.amazonaws.com  to inventory-ec2-node-exporter.txt and
+under job_name: 'node_exporter' in /cicd11_monitoring2/roles/prometheus/tasks/main.yml
+
+ansible-playbook -i inventory-ec2-node-exporter.txt ansible-ec2-node-exporter.yml --private-key=xam-ec2-key-cicd.pem
+
+ansible-playbook -i inventory-ec2-prometheus.txt ansible-ec2-prometheus.yml --private-key=xam-ec2-key-cicd.pem
+
+ec2-107-20-37-92.compute-1.amazonaws.com:9090
+
+we can see two items under status service directory
+node_exporter
+prometheus
+-----------------------------------------------------------------------
+
+

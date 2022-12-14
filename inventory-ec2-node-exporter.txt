@@ -1,2 +1,2 @@
 [nodeX]
-ec2-34-226-211-183.compute-1.amazonaws.com
+ec2-44-204-51-188.compute-1.amazonaws.com
